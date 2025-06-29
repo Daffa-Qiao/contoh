@@ -10,7 +10,7 @@
                 <h1 class="text-black fw-bold">Selamat Datang</h1>
                 <h1 class="text-black fw-bold">di Sehat Rasa</h1>
                 <p class="text-black-50 mb-4">Temukan informasi kesehatan terpercaya dan konsultasi dengan dokter ahli untuk hidup lebih sehat.</p>
-                <a href="/login" class="btn btn-light btn-lg" style="background-color:green; color: white;">Mulai Konsultasi</a>
+                <a href="/admin/login" class="btn btn-light btn-lg" style="background-color:green; color: white;">Mulai Konsultasi</a>
             </div>
             <div class="col-lg-6" style="width: 30%;margin-left: 100px;">
                 <img src="{{ asset('img/logo.png') }}" alt="Health Illustration" class="img-fluid">
@@ -29,7 +29,7 @@
                     <i class="fas fa-user-md fa-3x mb-3" style="color: green;"></i>
                     <h4>Konsultasi Online</h4>
                     <p>Konsultasi dengan dokter ahli secara online kapan saja dan dimana saja.</p>
-                    <a href="/login" class="btn" style="background-color:green; color: white;">Konsultasi</a>
+                    <a href="/admin/login" class="btn" style="background-color:green; color: white;">Konsultasi</a>
                 </div>
             </div>
         </div>

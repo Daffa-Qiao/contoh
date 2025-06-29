@@ -6,6 +6,7 @@ use App\Http\Controllers\WEB\PageController;
 use App\Http\Controllers\WEB\AdminController;
 use App\Http\Controllers\WEB\DocterImageController;
 use App\Http\Controllers\WEB\ReservationController;
+use App\Http\Controllers\WEB\AdminReservationController;
 use App\Http\Controllers\WEB\UserProfileController;
 use App\Http\Controllers\WEB\Admin\DocterController;
 use App\Http\Controllers\WEB\UserManagementController;
@@ -55,6 +56,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::middleware(['role:admin'])->prefix('admins')->group(function () {
         Route::resource('user-managements', UserManagementController::class)->names('user-managements');
         Route::resource('docters', DocterController::class)->names('docters');
+        
+        // Admin Reservation Routes
+        Route::get('reservations', [AdminReservationController::class, 'index'])->name('admin.reservations.index');
+        Route::post('reservations', [AdminReservationController::class, 'store'])->name('admin.reservations.store');
+        Route::get('reservations/{id}', [AdminReservationController::class, 'show'])->name('admin.reservations.show');
+        Route::post('reservations/{id}/cancel', [AdminReservationController::class, 'cancel'])->name('admin.reservations.cancel');
+        Route::get('reservations/history', [AdminReservationController::class, 'history'])->name('admin.reservations.history');
+        Route::get('reservations/reports', [AdminReservationController::class, 'reports'])->name('admin.reservations.reports');
+        Route::get('reservations/export/{format}', [AdminReservationController::class, 'export'])->name('admin.reservations.export');
     });
     Route::middleware(['docter'])->prefix('docters')->group(function () {
         Route::resource('reservations', ReservationController::class)->names('reservations');

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Login Admin')
+@section('title', 'Login User')
 @section('content')
 <div class="position-fixed" style="top: 20px; left: 20px; z-index: 1000;">
         <a href="/" class="btn btn-light rounded-circle shadow-sm" title="Home">
@@ -12,14 +12,14 @@
             <i class="fas fa-user-circle me-2"></i>Pilih Login
         </button>
         <ul class="dropdown-menu" aria-labelledby="loginTypeDropdown">
-            <li><a class="dropdown-item {{ Request::is('login') ? 'active' : '' }}" href="{{ route('user.login-form') }}">
+            <!-- <li><a class="dropdown-item {{ Request::is('login') ? 'active' : '' }}" href="{{ route('user.login-form') }}">
                 <i class="fas fa-user me-2"></i>Login Pasien
-            </a></li>
+            </a></li> -->
             <li><a class="dropdown-item {{ Request::is('login-dokter') ? 'active' : '' }}" href="/login-dokter">
                 <i class="fas fa-user-md me-2"></i>Login Dokter
             </a></li>
             <li><a class="dropdown-item {{ Request::is('admin/login') ? 'active' : '' }}" href="/admin/login">
-                <i class="fas fa-user-shield me-2"></i>Login Admin
+                <i class="fas fa-user-shield me-2"></i>Login User
             </a></li>
         </ul>
     </div>
@@ -38,7 +38,7 @@
                     <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
                         <div class="card card-plain">
                             <div class="card-header pb-0 text-start">
-                                <h4 class="font-weight-bolder">Sign In Into Admin Dashboard</h4>
+                                <h4 class="font-weight-bolder">Sign In Into Dashboard</h4>
                                 <p class="mb-0">Enter your email and password to sign in</p>
                             </div>
                             <div class="card-body">

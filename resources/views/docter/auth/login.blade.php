@@ -12,14 +12,14 @@
             <i class="fas fa-user-circle me-2"></i>Pilih Login
         </button>
         <ul class="dropdown-menu" aria-labelledby="loginTypeDropdown">
-            <li><a class="dropdown-item {{ Request::is('login') ? 'active' : '' }}" href="{{ route('user.login-form') }}">
+            <!-- <li><a class="dropdown-item {{ Request::is('login') ? 'active' : '' }}" href="{{ route('user.login-form') }}">
                 <i class="fas fa-user me-2"></i>Login Pasien
-            </a></li>
+            </a></li> -->
             <li><a class="dropdown-item {{ Request::is('login-dokter') ? 'active' : '' }}" href="/login-dokter">
                 <i class="fas fa-user-md me-2"></i>Login Dokter
             </a></li>
             <li><a class="dropdown-item {{ Request::is('admin/login') ? 'active' : '' }}" href="/admin/login">
-                <i class="fas fa-user-shield me-2"></i>Login Admin
+                <i class="fas fa-user-shield me-2"></i>Login User
             </a></li>
         </ul>
     </div>
