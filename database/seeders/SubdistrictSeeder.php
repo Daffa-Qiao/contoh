@@ -2,42 +2,58 @@
 
 namespace Database\Seeders;
 
-use App\Models\Subdistrict;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class SubdistrictSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
+    public function run(): void
     {
-        $data = [
-            ["districts_id" => 1759, "name" => "Banyumanik", "zip_code" => 50261, "city_id" => 116],
-            ["districts_id" => 1760, "name" => "Candisari", "zip_code" => 50252, "city_id" => 116],
-            ["districts_id" => 1761, "name" => "Gajah Mungkur", "zip_code" => 50231, "city_id" => 116],
-            ["districts_id" => 1762, "name" => "Gayamsari", "zip_code" => 50162, "city_id" => 116],
-            ["districts_id" => 1763, "name" => "Genuk", "zip_code" => 50111, "city_id" => 116],
-            ["districts_id" => 1764, "name" => "Gunungpati", "zip_code" => 50221, "city_id" => 116],
-            ["districts_id" => 1765, "name" => "Mijen", "zip_code" => 50211, "city_id" => 116],
-            ["districts_id" => 1766, "name" => "Ngaliyan", "zip_code" => 50181, "city_id" => 116],
-            ["districts_id" => 1767, "name" => "Pedurungan", "zip_code" => 50113, "city_id" => 116],
-            ["districts_id" => 1768, "name" => "Semarang Barat", "zip_code" => 50141, "city_id" => 116],
-            ["districts_id" => 1769, "name" => "Semarang Selatan", "zip_code" => 50241, "city_id" => 116],
-            ["districts_id" => 1770, "name" => "Semarang Tengah", "zip_code" => 50131, "city_id" => 116],
-            ["districts_id" => 1771, "name" => "Semarang Timur", "zip_code" => 50122, "city_id" => 116],
-            ["districts_id" => 1772, "name" => "Semarang Utara", "zip_code" => 50171, "city_id" => 116],
-            ["districts_id" => 1773, "name" => "Tembalang", "zip_code" => 50271, "city_id" => 116],
-            ["districts_id" => 1774, "name" => "Tugu", "zip_code" => 50151, "city_id" => 116],
+        $jakartaSubdistricts = [
+            ['subdistrict_id' => 'JK01', 'name' => 'Cempaka Putih'],
+            ['subdistrict_id' => 'JK02', 'name' => 'Gambir'],
+            ['subdistrict_id' => 'JK03', 'name' => 'Johar Baru'],
+            ['subdistrict_id' => 'JK04', 'name' => 'Kemayoran'],
+            ['subdistrict_id' => 'JK05', 'name' => 'Menteng'],
+            ['subdistrict_id' => 'JK06', 'name' => 'Sawah Besar'],
+            ['subdistrict_id' => 'JK07', 'name' => 'Senen'],
+            ['subdistrict_id' => 'JK08', 'name' => 'Tanah Abang'],
+            ['subdistrict_id' => 'JK09', 'name' => 'Cakung'],
+            ['subdistrict_id' => 'JK10', 'name' => 'Cilincing'],
+            ['subdistrict_id' => 'JK11', 'name' => 'Kelapa Gading'],
+            ['subdistrict_id' => 'JK12', 'name' => 'Koja'],
+            ['subdistrict_id' => 'JK13', 'name' => 'Pademangan'],
+            ['subdistrict_id' => 'JK14', 'name' => 'Penjaringan'],
+            ['subdistrict_id' => 'JK15', 'name' => 'Tanjung Priok'],
+            ['subdistrict_id' => 'JK16', 'name' => 'Grogol Petamburan'],
+            ['subdistrict_id' => 'JK17', 'name' => 'Kalideres'],
+            ['subdistrict_id' => 'JK18', 'name' => 'Kebon Jeruk'],
+            ['subdistrict_id' => 'JK19', 'name' => 'Kembangan'],
+            ['subdistrict_id' => 'JK20', 'name' => 'Palmerah'],
+            ['subdistrict_id' => 'JK21', 'name' => 'Taman Sari'],
+            ['subdistrict_id' => 'JK22', 'name' => 'Tambora'],
+            ['subdistrict_id' => 'JK23', 'name' => 'Cilandak'],
+            ['subdistrict_id' => 'JK24', 'name' => 'Jagakarsa'],
+            ['subdistrict_id' => 'JK25', 'name' => 'Kebayoran Baru'],
+            ['subdistrict_id' => 'JK26', 'name' => 'Kebayoran Lama'],
+            ['subdistrict_id' => 'JK27', 'name' => 'Mampang Prapatan'],
+            ['subdistrict_id' => 'JK28', 'name' => 'Pancoran'],
+            ['subdistrict_id' => 'JK29', 'name' => 'Pasar Minggu'],
+            ['subdistrict_id' => 'JK30', 'name' => 'Pesanggrahan'],
+            ['subdistrict_id' => 'JK31', 'name' => 'Setiabudi'],
+            ['subdistrict_id' => 'JK32', 'name' => 'Tebet'],
+            ['subdistrict_id' => 'JK33', 'name' => 'Cipayung'],
+            ['subdistrict_id' => 'JK34', 'name' => 'Ciracas'],
+            ['subdistrict_id' => 'JK35', 'name' => 'Duren Sawit'],
+            ['subdistrict_id' => 'JK36', 'name' => 'Jatinegara'],
+            ['subdistrict_id' => 'JK37', 'name' => 'Kramat Jati'],
+            ['subdistrict_id' => 'JK38', 'name' => 'Makasar'],
+            ['subdistrict_id' => 'JK39', 'name' => 'Matraman'],
+            ['subdistrict_id' => 'JK40', 'name' => 'Pasar Rebo'],
+            ['subdistrict_id' => 'JK41', 'name' => 'Pulo Gadung'],
         ];
-
-
-        foreach ($data as $record) {
-            Subdistrict::create([
-                "name" => $record['name']
-            ]);
+        foreach ($jakartaSubdistricts as $sd) {
+            DB::table('subdistricts')->insert($sd);
         }
     }
-}
+} 

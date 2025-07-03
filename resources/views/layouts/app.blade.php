@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
-    <title>@yield('title') | Sehat Rasa</title>
+    <title>
+        @yield('title') | Sehat Rasa
+    </title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
@@ -46,33 +46,10 @@
             </div>
         </div>
     </div>
-    @guestOrNotAdminOrDocter
-        @yield('content')
-    @endguestOrNotAdminOrDocter
-
-    @authOrDocter
-        @if (in_array(request()->route()->getName(),
-                ['sign-in-static', 'sign-up-static', 'login', 'register', 'recover-password', 'rtl', 'virtual-reality', 'dashboard']))
-            @yield('content')
-        @else
-            @if (
-                !in_array(request()->route()->getName(),
-                    ['profile', 'profile-static']))
-                <div class="min-height-300 bg-primary position-absolute w-100"></div>
-            @elseif (in_array(request()->route()->getName(),
-                    ['profile-static', 'profile']))
-                <div class="position-absolute w-100 min-height-300 top-0"
-                    style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg'); background-position-y: 50%;">
-                    <span class="mask bg-primary opacity-6"></span>
-                </div>
-            @endif
-            @include('layouts.navbars.auth.sidenav')
-            <main class="main-content border-radius-lg">
+           <main class="main-content border-radius-lg">
                 @yield('content')
             </main>
             @include('components.fixed-plugin')
-        @endif
-    @endauthOrDocter
 
     <!--   Core JS Files   -->
     <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
@@ -114,15 +91,6 @@
             }
         });
     </script>
-
-    <!-- Footer -->
-    <footer class="footer py-3 bg-white shadow-sm" style="position: fixed; bottom: 0; width: 100%;">
-        <div class="container text-center">
-            <p class="mb-0" style="color: green;">
-                &copy; {{ date('Y') }} Sehat Rasa. All rights reserved.
-            </p>
-        </div>
-    </footer>
 </body>
 
 </html>

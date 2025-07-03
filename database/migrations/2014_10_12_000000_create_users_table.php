@@ -4,36 +4,35 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
             $table->string('name');
-            $table->string('email')->nullable()->unique();
-            $table->string('phone')->nullable()->unique();
-            $table->string('photo')->default(null)->nullable();
-            $table->string('device_token')->nullable();
-            $table->foreignUuid('subdistrict_id')->constrained('subdistricts', 'id');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->softDeletes();
+            $table->enum('role', ['pasien', 'dokter', 'admin'])->default('pasien');
+            $table->unsignedBigInteger('subdistrict_id');
+            $table->string('phone')->nullable();
+            $table->string('photo')->nullable();
+            $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('subdistrict_id')->references('id')->on('subdistricts')->onDelete('cascade');
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('users');
     }
-}
+};

@@ -1,133 +1,126 @@
-# Doctor Reservation API and Dashboard (Laravel 8.0)
+# Konsultasi Dokter
 
-This project combines a RESTful API and a sophisticated dashboard built with Laravel 8.0 and PHP 7.4.2 for making doctor reservations. It simplifies the process of booking appointments with doctors in Semarang while providing an interactive dashboard for managing the system.
-This project uses the [Argon Dashboard Laravel](https://www.creative-tim.com/live/argon-dashboard-laravel), which provides a easy development and good user interface for dashboard.
+Aplikasi konsultasi dokter berbasis Laravel dengan sistem role admin, dokter, dan pasien.
 
-## Table of Contents
+## Fitur Utama
 
--   [Features](#features)
--   [Prerequisites](#prerequisites)
--   [Getting Started](#getting-started)
--   [API Endpoints](#api-endpoints)
--   [Dashboard](#dashboard)
--   [Contributing](#contributing)
--   [License](#license)
+### Admin
+- Dashboard admin
+- Manajemen akun (CRUD user) dengan modal create
+- Manajemen reservasi (CRUD) dengan modal create
 
-## Features
+### Dokter
+- Dashboard dokter
+- Lihat reservasi masuk
+- Update status reservasi
 
-### API (For Users and Doctors)
+### Pasien
+- Dashboard pasien
+- Buat reservasi konsultasi
+- Lihat riwayat reservasi
 
--   User authentication with JWT tokens.
--   Endpoints for searching and booking appointments with doctors.
--   User and doctor profiles.
--   Real-time notifications for appointment status updates.
--   Role-based access control for users and doctors.
+## Modul Manajemen Akun (Admin)
 
-### Dashboard (For Admin and Doctors)
+Modul ini memungkinkan admin untuk mengelola semua akun user dalam sistem.
 
--   Admin dashboard built with Argon template for easy management.
--   Doctor dashboard for managing appointments and profiles.
--   Real-time updates on appointment requests.
--   CRUD operations for managing doctors and appointments.
--   Beautifully designed UI for a seamless experience.
+### Fitur:
+1. **List User** - Menampilkan semua user dengan pagination
+2. **Search & Filter** - Pencarian berdasarkan nama/email dan filter berdasarkan role
+3. **Tambah User** - Modal form untuk menambah user baru
+4. **Edit User** - Form untuk mengubah data user
+5. **Hapus User** - Hapus user (admin tidak bisa menghapus akun sendiri)
 
-## Prerequisites
+### Akses:
+- Hanya admin yang bisa mengakses
+- Menggunakan middleware `role:admin`
+- Dilengkapi dengan Policy untuk authorization
 
-Before you begin, ensure you have met the following requirements:
+### Route:
+```
+GET    /admin/users              - List semua user
+POST   /admin/users              - Simpan user baru (via modal)
+GET    /admin/users/{user}/edit  - Form edit user
+PUT    /admin/users/{user}       - Update user
+DELETE /admin/users/{user}       - Hapus user
+```
 
--   [PHP](https://www.php.net/) 7.4.2 or later
--   [Composer](https://getcomposer.org/) (for Laravel)
--   [Node.js](https://nodejs.org/) (for managing frontend dependencies)
+### File yang Dibuat:
+- `app/Http/Controllers/Admin/UserManagementController.php`
+- `app/Policies/UserPolicy.php`
+- `resources/views/admin/users/index.blade.php` (dengan modal create)
+- `resources/views/admin/users/edit.blade.php`
 
-## Getting Started
+### Modal Features:
+- Bootstrap modal untuk create user
+- Form validation dengan error handling
+- Auto-reset form ketika modal ditutup/dibuka
+- Auto-open modal jika ada validation errors
 
-To get the Doctor Reservation API and Dashboard up and running on your local machine, follow these steps:
+## Modul Manajemen Reservasi (Admin)
 
-1. Clone the repository:
+Modul ini memungkinkan admin untuk mengelola semua reservasi dalam sistem.
 
-    ```shell
-    git clone https://github.com/ilhammmaulana/doctor-reservation.git
-    ```
+### Fitur:
+1. **List Reservasi** - Menampilkan semua reservasi dengan pagination
+2. **Search & Filter** - Pencarian berdasarkan nama pasien/dokter dan filter berdasarkan status
+3. **Tambah Reservasi** - Modal form untuk menambah reservasi baru
+4. **Edit Reservasi** - Form untuk mengubah data reservasi
+5. **Detail Reservasi** - Lihat detail lengkap reservasi
+6. **Hapus Reservasi** - Hapus reservasi
 
-2. Navigate to the project directory:
+### Akses:
+- Hanya admin yang bisa mengakses
+- Menggunakan middleware `role:admin`
 
-    ```shell
-    cd doctor-reservation
-    ```
+### Route:
+```
+GET    /admin/reservations              - List semua reservasi
+POST   /admin/reservations              - Simpan reservasi baru (via modal)
+GET    /admin/reservations/{id}         - Detail reservasi
+GET    /admin/reservations/{id}/edit    - Form edit reservasi
+PUT    /admin/reservations/{id}         - Update reservasi
+DELETE /admin/reservations/{id}         - Hapus reservasi
+```
 
-3. Install PHP dependencies:
+### File yang Dibuat:
+- `app/Http/Controllers/Admin/ReservationController.php`
+- `resources/views/admin/reservations/index.blade.php` (dengan modal create)
+- `resources/views/admin/reservations/show.blade.php`
+- `resources/views/admin/reservations/edit.blade.php`
 
-    ```shell
-    composer install
-    ```
+### Modal Features:
+- Bootstrap modal untuk create reservasi
+- Form validation dengan error handling
+- Auto-reset form ketika modal ditutup/dibuka
+- Auto-open modal jika ada validation errors
+- Dropdown untuk pilih pasien dan dokter
 
-4. Create a copy of the `.env.example` file and rename it to `.env`. Update the `.env` file with your configuration, including your database settings and application key:
+## Instalasi
 
-    ```shell
-    cp .env.example .env
-    php artisan key:generate
-    ```
+1. Clone repository
+2. Install dependencies: `composer install`
+3. Copy `.env.example` ke `.env`
+4. Generate key: `php artisan key:generate`
+5. Setup database di `.env`
+6. Run migration: `php artisan migrate`
+7. Run seeder: `php artisan db:seed`
+8. Serve aplikasi: `php artisan serve`
 
-5. Install JavaScript dependencies:
+## Struktur Database
 
-    ```shell
-    npm install
-    ```
+### Users Table
+- `id` - Primary key
+- `name` - Nama lengkap
+- `email` - Email (unique)
+- `password` - Password (hashed)
+- `role` - Role (admin/dokter/pasien)
+- `created_at` - Timestamp
+- `updated_at` - Timestamp
 
-6. Migrate the database and run seeders:
+## Security
 
-    ```shell
-    php artisan migrate --seed
-    ```
-
-7. Create symlink using:
-
-    ```shell
-    php artisan storage:link
-    ```
-
-8. Rename 'storage' symlink in public folder to 'public':
-
-    ```shell
-        mv public/storage public/public
-    ```
-
-9. Start the Laravel development server:
-
-    ```shell
-    php artisan serve
-    ```
-
-Now, you can access the API at `http://127.0.0.1:8000/api` and the Dashboard at `http://127.0.0.1:8000/`.
-
-## User sample
-
-    Docter:
-    email: docter@gmail.com
-    password: password_docter
-
-    User:
-    email: admin@gmail.com
-    password: password
-
-## API Endpoints
-
-For detailed information about available API endpoints and their usage, refer to the [API documentation](#api-documentation).
-
-## Dashboard
-
-The dashboard provides an interactive interface for doctors and administrators to manage appointments, doctors, and users. For more details on how to use the dashboard, refer to the [Dashboard documentation](#dashboard-documentation).
-
-## Contributing
-
-Contributions are welcome! If you would like to contribute to this project, please follow these guidelines:
-
-1. Fork the project.
-2. Create a new branch for your feature (`git checkout -b feature/your-feature`).
-3. Make your changes and commit them (`git commit -m 'Add some feature'`).
-4. Push to your branch (`git push origin feature/your-feature`).
-5. Open a pull request.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
+- Password di-hash menggunakan bcrypt
+- Role-based access control
+- Policy-based authorization
+- CSRF protection
+- Input validation
