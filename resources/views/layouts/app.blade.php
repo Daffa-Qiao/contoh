@@ -7,6 +7,7 @@
     <title>
         @yield('title') | Sehat Rasa
     </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
@@ -49,6 +50,11 @@
            <main class="main-content border-radius-lg">
                 @yield('content')
             </main>
+            @auth
+                @include('layouts.footers.auth.footer')
+            @else
+                @include('layouts.footers.guest.footer')
+            @endauth
             @include('components.fixed-plugin')
 
     <!--   Core JS Files   -->

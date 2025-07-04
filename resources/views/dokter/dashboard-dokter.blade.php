@@ -6,8 +6,7 @@
     <div class="card">
         <div class="card-header bg-primary text-white">Dashboard Dokter</div>
         <div class="card-body">
-            <h4>Selamat datang, {{ auth()->user()->name }}!</h4>
-            <p>Anda login sebagai <strong>Dokter</strong>.</p>
+            <h4>Selamat datang, {{ auth()->user()->name }}!</h4> 
         </div>
     </div>
 </div>

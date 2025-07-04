@@ -1,4 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+<nav class="navbar navbar-expand-lg
+    @if(auth()->user()->role === 'pasien') navbar-light bg-success
+    @else navbar-light bg-danger
+    @endif mb-4">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Dashboard</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDashboard" aria-controls="navbarDashboard" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,7 +45,7 @@
                         {{ auth()->user()->name }}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Profil</a></li>
+                        <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Ubah Profil</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
